@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import Boss from "../assets/boss-hog.png";
 import BabyHog from "./BabyHog";
-// import offspring from "../data.js"
+import offspring from "../data.js"
 
+//console.log(offspring)
 function HogBoss() {
   const [eyeColor, setEyeColor] = useState("blue");
+  const [weight,setWeight] = useState(0);
 
   function handleChangeEyeColor(e) {
     setEyeColor(e.target.value);
   }
-
+  function handleChangeWeight(e) {
+    if (e.target.name === "+"){
+      setWeight(weight + 1)
+    } else if (e.target.name === "-"){
+      setWeight(weight - 1)
+    }
+  }
   return (
     <div>
       <input
@@ -40,9 +48,7 @@ function HogBoss() {
         <img id="boss-blaster" src={Boss} alt="" />
       </div>
       <ul className="hoglist">
-        <BabyHog />
-        <BabyHog />
-        <BabyHog />
+        <BabyHog eyeColor={eyeColor} offspring={offspring} weight={weight} setWeight={handleChangeWeight}/>
       </ul>
     </div>
   );
